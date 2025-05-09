@@ -1,0 +1,182 @@
+import java.util.Scanner;
+
+/**
+ * A Java program that simulates a basic ATM system.
+ * Features include: check balance, deposit, withdraw
+ */
+public class ATMSystem {
+    private static Scanner scanner = new Scanner(System.in);
+    private static double balance = 10000.00; // Initial balance
+    private static final int PIN = 1234; // Default PIN
+    
+    public static void main(String[] args) {
+        System.out.println("===== WELCOME TO UNN BANK ATM =====");
+        
+        if (authenticateUser()) {
+            boolean running = true;
+            
+            while (running) {
+                displayMenu();
+                int choice = getMenuChoice();
+                
+                switch (choice) {
+                    case 1: // Check Balance
+                        checkBalance();
+                        break;
+                    case 2: // Deposit
+                        deposit();
+                        break;
+                    case 3: // Withdraw
+                        withdraw();
+                        break;
+                    case 4: // Exit
+                        System.out.println("\nThank you for using UNN Bank ATM. Goodbye!");
+                        running = false;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                }
+                
+                // Prompt to continue or exit after each operation
+                if (running && choice >= 1 && choice <= 3) {
+                    System.out.print("\nPress Enter to continue...");
+                    scanner.nextLine(); // Wait for Enter key
+                }
+            }
+        } else {
+            System.out.println("Too many incorrect PIN attempts. Your card has been blocked.");
+        }
+        
+        scanner.close();
+    }
+    
+    /**
+     * Authenticates the user by validating PIN
+     * @return true if authentication successful, false otherwise
+     */
+    private static boolean authenticateUser() {
+        int attempts = 0;
+        final int MAX_ATTEMPTS = 3;
+        
+        while (attempts < MAX_ATTEMPTS) {
+            System.out.print("\nPlease enter your PIN: ");
+            
+            // Validate input is a number
+            if (!scanner.hasNextInt()) {
+                System.out.println("Invalid PIN format. Please enter digits only.");
+                scanner.next(); // Consume invalid input
+                attempts++;
+                continue;
+            }
+            
+            int enteredPin = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+            
+            if (enteredPin == PIN) {
+                System.out.println("PIN accepted. Welcome!");
+                return true;
+            } else {
+                attempts++;
+                int remainingAttempts = MAX_ATTEMPTS - attempts;
+                
+                if (remainingAttempts > 0) {
+                    System.out.println("Incorrect PIN. You have " + remainingAttempts + 
+                                       " attempt" + (remainingAttempts == 1 ? "" : "s") + " remaining.");
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Displays the main menu options
+     */
+    private static void displayMenu() {
+        System.out.println("\n===== ATM MENU =====");
+        System.out.println("1. Check Balance");
+        System.out.println("2. Deposit");
+        System.out.println("3. Withdraw");
+        System.out.println("4. Exit");
+        System.out.print("Enter your choice (1-4): ");
+    }
+    
+    /**
+     * Gets and validates user menu choice
+     * @return The validated menu choice
+     */
+    private static int getMenuChoice() {
+        while (!scanner.hasNextInt()) {
+            System.out.print("Please enter a number (1-4): ");
+            scanner.next(); // Consume invalid input
+        }
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        return choice;
+    }
+    
+    /**
+     * Displays current account balance
+     */
+    private static void checkBalance() {
+        System.out.println("\n----- ACCOUNT BALANCE -----");
+        System.out.printf("Your current balance is: ₦%.2f\n", balance);
+    }
+    
+    /**
+     * Handles deposit operation
+     */
+    private static void deposit() {
+        System.out.println("\n----- DEPOSIT -----");
+        System.out.print("Enter amount to deposit: ₦");
+        
+        double amount = getValidAmount();
+        
+        if (amount <= 0) {
+            System.out.println("Invalid amount. Deposit amount must be positive.");
+            return;
+        }
+        
+        balance += amount;
+        System.out.printf("₦%.2f has been deposited to your account.\n", amount);
+        System.out.printf("Your new balance is: ₦%.2f\n", balance);
+    }
+    
+    /**
+     * Handles withdrawal operation
+     */
+    private static void withdraw() {
+        System.out.println("\n----- WITHDRAWAL -----");
+        System.out.print("Enter amount to withdraw: ₦");
+        
+        double amount = getValidAmount();
+        
+        if (amount <= 0) {
+            System.out.println("Invalid amount. Withdrawal amount must be positive.");
+            return;
+        }
+        
+        if (amount > balance) {
+            System.out.println("Insufficient funds. Your withdrawal cannot be processed.");
+            System.out.printf("Your current balance is: ₦%.2f\n", balance);
+            return;
+        }
+        
+        balance -= amount;
+        System.out.printf("₦%.2f has been withdrawn from your account.\n", amount);
+        System.out.printf("Your new balance is: ₦%.2f\n", balance);
+    }
+    
+    /**
+     * Gets and validates a monetary amount input
+     * @return A valid monetary amount
+     */
+    private static double getValidAmount() {
+        while (!scanner.hasNextDouble()) {
+            System.out.print("Please enter a valid amount: ₦");
+            scanner.next(); // Consume invalid input
+        }
+        double amount = scanner.nextDouble();
+        scanner.nextLine(); // Consume newline
+        return amount;
+    }
