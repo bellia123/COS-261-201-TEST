@@ -1,0 +1,30 @@
+public class MethodOverloadingExample {
+    // Method with two int parameters
+    public int add(int a, int b) {
+        return a + b;
+    }
+    
+    // Overloaded method with three int parameters
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+    
+    // Overloaded method with two double parameters
+    public double add(double a, double b) {
+        return a + b;
+    }
+    
+    // Overloaded method with mixed parameters
+    public double add(int a, double b) {
+        return a + b;
+    }
+    
+    public static void main(String[] args) {
+        MethodOverloadingExample calc = new MethodOverloadingExample();
+        
+        System.out.println("Adding two integers: " + calc.add(5, 10));
+        System.out.println("Adding three integers: " + calc.add(5, 10, 15));
+        System.out.println("Adding two doubles: " + calc.add(5.5, 10.5));
+        System.out.println("Adding int and double: " + calc.add(5, 10.5));
+    }
+}
