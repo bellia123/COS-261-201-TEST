@@ -1,0 +1,40 @@
+// Bad example - violating DRY
+public class WithoutDRY {
+    public static void main(String[] args) {
+        // Calculate area of three rectangles
+        double length1 = 5;
+        double width1 = 3;
+        double area1 = length1 * width1;
+        System.out.println("Area of rectangle 1: " + area1);
+        
+        double length2 = 7;
+        double width2 = 4;
+        double area2 = length2 * width2;
+        System.out.println("Area of rectangle 2: " + area2);
+        
+        double length3 = 10;
+        double width3 = 6;
+        double area3 = length3 * width3;
+        System.out.println("Area of rectangle 3: " + area3);
+    }
+}
+
+// Good example - following DRY
+public class WithDRY {
+    // Extract the repeated calculation into a method
+    public static double calculateRectangleArea(double length, double width) {
+        return length * width;
+    }
+    
+    public static void printArea(String name, double length, double width) {
+        double area = calculateRectangleArea(length, width);
+        System.out.println("Area of " + name + ": " + area);
+    }
+    
+    public static void main(String[] args) {
+        // Use the method for all three calculations
+        printArea("rectangle 1", 5, 3);
+        printArea("rectangle 2", 7, 4);
+        printArea("rectangle 3", 10, 6);
+    }
+}
