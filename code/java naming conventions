@@ -1,0 +1,19 @@
+public class StudentRecord {
+    private String studentName;
+    private int studentAge;
+
+    public StudentRecord(String studentName, int studentAge) {
+        this.studentName = studentName;
+        this.studentAge = studentAge;
+    }
+
+    public void displayStudentInfo() {
+        System.out.println("Name: " + studentName);
+        System.out.println("Age: " + studentAge);
+    }
+
+    public static void main(String[] args) {
+        StudentRecord student = new StudentRecord("Alice", 20);
+        student.displayStudentInfo();
+    }
+}
