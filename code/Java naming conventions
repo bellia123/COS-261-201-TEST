@@ -1,0 +1,32 @@
+public class NamingConventionExample {
+    // Constant (uppercase with underscores)
+    public static final int MAX_STUDENTS = 100;
+    
+    // Instance variable (camelCase)
+    private int studentCount;
+    
+    // Method name (camelCase)
+    public void addStudent(String studentName) {
+        // Local variable (camelCase)
+        int currentIndex = studentCount;
+        studentCount++;
+        System.out.println("Added student " + studentName + " at position " + currentIndex);
+    }
+    
+    // Class for student (PascalCase)
+    class StudentRecord {
+        private String name;
+        private int age;
+        
+        public StudentRecord(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+    }
+    
+    public static void main(String[] args) {
+        NamingConventionExample example = new NamingConventionExample();
+        example.addStudent("Chioma");
+        System.out.println("Maximum allowed students: " + MAX_STUDENTS);
+    }
+}
