@@ -1,0 +1,21 @@
+public class EqualityTest {
+    public static void main(String[] args) {
+        // Using == with primitive types
+        int num1 = 5;
+        int num2 = 5;
+        System.out.println("num1 == num2: " + (num1 == num2)); // true
+        
+        // Using == with objects
+        String str1 = new String("Hello");
+        String str2 = new String("Hello");
+        System.out.println("str1 == str2: " + (str1 == str2)); // false (different objects)
+        
+        // Using .equals() with objects
+        System.out.println("str1.equals(str2): " + str1.equals(str2)); // true (same content)
+        
+        // String literals from string pool
+        String str3 = "World";
+        String str4 = "World";
+        System.out.println("str3 == str4: " + (str3 == str4)); // true (same reference)
+    }
+}
