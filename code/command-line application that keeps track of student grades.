@@ -1,0 +1,256 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * A command-line application that manages student records and grades.
+ * Allows adding, updating, and viewing student records.
+ */
+public class StudentGradeSystem {
+    // ArrayList to store student records
+    private static ArrayList<Student> students = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
+    
+    public static void main(String[] args) {
+        boolean running = true;
+        
+        System.out.println("===== STUDENT GRADE MANAGEMENT SYSTEM =====");
+        
+        while (running) {
+            displayMenu();
+            int choice = getChoice();
+            
+            switch (choice) {
+                case 1:
+                    addStudent();
+                    break;
+                case 2:
+                    updateStudent();
+                    break;
+                case 3:
+                    viewAllStudents();
+                    break;
+                case 4:
+                    searchStudent();
+                    break;
+                case 5:
+                    running = false;
+                    System.out.println("Thank you for using the Student Grade System. Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+        
+        scanner.close();
+    }
+    
+    /**
+     * Displays the main menu options
+     */
+    private static void displayMenu() {
+        System.out.println("\nPlease select an option:");
+        System.out.println("1. Add a new student");
+        System.out.println("2. Update student grade");
+        System.out.println("3. View all students");
+        System.out.println("4. Search for a student");
+        System.out.println("5. Exit");
+        System.out.print("Enter your choice (1-5): ");
+    }
+    
+    /**
+     * Gets the user's menu choice and validates it
+     * @return The validated menu choice
+     */
+    private static int getChoice() {
+        while (!scanner.hasNextInt()) {
+            System.out.print("Please enter a number (1-5): ");
+            scanner.next(); // Consume invalid input
+        }
+        return scanner.nextInt();
+    }
+    
+    /**
+     * Adds a new student record to the system
+     */
+    private static void addStudent() {
+        scanner.nextLine(); // Consume newline
+        
+        System.out.println("\n----- Add a New Student -----");
+        
+        System.out.print("Enter student name: ");
+        String name = scanner.nextLine();
+        
+        System.out.print("Enter matric number: ");
+        String matricNo = scanner.nextLine();
+        
+        // Check if matric number already exists
+        for (Student s : students) {
+            if (s.getMatricNo().equals(matricNo)) {
+                System.out.println("Error: A student with this matric number already exists!");
+                return;
+            }
+        }
+        
+        System.out.print("Enter grade (0-100): ");
+        double grade = validateGrade();
+        
+        students.add(new Student(name, matricNo, grade));
+        System.out.println("Student added successfully!");
+    }
+    
+    /**
+     * Updates an existing student's grade
+     */
+    private static void updateStudent() {
+        if (students.isEmpty()) {
+            System.out.println("No students in the system yet!");
+            return;
+        }
+        
+        scanner.nextLine(); // Consume newline
+        
+        System.out.println("\n----- Update Student Grade -----");
+        System.out.print("Enter student matric number: ");
+        String matricNo = scanner.nextLine();
+        
+        for (Student s : students) {
+            if (s.getMatricNo().equals(matricNo)) {
+                System.out.print("Enter new grade (0-100): ");
+                double newGrade = validateGrade();
+                s.setGrade(newGrade);
+                System.out.println("Grade updated successfully!");
+                return;
+            }
+        }
+        
+        System.out.println("Student with matric number " + matricNo + " not found!");
+    }
+    
+    /**
+     * Displays all student records
+     */
+    private static void viewAllStudents() {
+        if (students.isEmpty()) {
+            System.out.println("No students in the system yet!");
+            return;
+        }
+        
+        System.out.println("\n----- All Students -----");
+        System.out.printf("%-20s %-15s %-10s %-10s%n", "NAME", "MATRIC NO", "GRADE", "GRADE POINT");
+        System.out.println("------------------------------------------------------");
+        
+        for (Student s : students) {
+            System.out.printf("%-20s %-15s %-10.2f %-10s%n", 
+                              s.getName(), 
+                              s.getMatricNo(), 
+                              s.getGrade(), 
+                              s.getLetterGrade());
+        }
+    }
+    
+    /**
+     * Searches for a student by matric number
+     */
+    private static void searchStudent() {
+        if (students.isEmpty()) {
+            System.out.println("No students in the system yet!");
+            return;
+        }
+        
+        scanner.nextLine(); // Consume newline
+        
+        System.out.println("\n----- Search for a Student -----");
+        System.out.print("Enter student matric number: ");
+        String matricNo = scanner.nextLine();
+        
+        for (Student s : students) {
+            if (s.getMatricNo().equals(matricNo)) {
+                System.out.println("\nStudent found:");
+                System.out.println("Name: " + s.getName());
+                System.out.println("Matric No: " + s.getMatricNo());
+                System.out.println("Grade: " + s.getGrade());
+                System.out.println("Grade Point: " + s.getLetterGrade());
+                return;
+            }
+        }
+        
+        System.out.println("Student with matric number " + matricNo + " not found!");
+    }
+    
+    /**
+     * Validates grade input to ensure it's between 0 and 100
+     * @return A valid grade value
+     */
+    private static double validateGrade() {
+        double grade = -1;
+        boolean valid = false;
+        
+        while (!valid) {
+            while (!scanner.hasNextDouble()) {
+                System.out.print("Please enter a valid number: ");
+                scanner.next(); // Consume invalid input
+            }
+            
+            grade = scanner.nextDouble();
+            
+            if (grade >= 0 && grade <= 100) {
+                valid = true;
+            } else {
+                System.out.print("Grade must be between 0 and 100. Try again: ");
+            }
+        }
+        
+        return grade;
+    }
+    
+    /**
+     * Student class to represent a student record
+     */
+    static class Student {
+        private String name;
+        private String matricNo;
+        private double grade;
+        
+        public Student(String name, String matricNo, double grade) {
+            this.name = name;
+            this.matricNo = matricNo;
+            this.grade = grade;
+        }
+        
+        public String getName() {
+            return name;
+        }
+        
+        public String getMatricNo() {
+            return matricNo;
+        }
+        
+        public double getGrade() {
+            return grade;
+        }
+        
+        public void setGrade(double grade) {
+            this.grade = grade;
+        }
+        
+        /**
+         * Converts numeric grade to letter grade
+         * @return The letter grade corresponding to the numeric grade
+         */
+        public String getLetterGrade() {
+            if (grade >= 70) {
+                return "A";
+            } else if (grade >= 60) {
+                return "B";
+            } else if (grade >= 50) {
+                return "C";
+            } else if (grade >= 45) {
+                return "D";
+            } else if (grade >= 40) {
+                return "E";
+            } else {
+                return "F";
+            }
+        }
+    }
+}
