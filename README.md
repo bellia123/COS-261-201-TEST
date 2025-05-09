@@ -1,10 +1,6 @@
 # COS 261-201 Java Test
 University of Nigeria, Nsukka - Computer Science Department
 
-## Student Information
-- Name: [Onyekawa Onyinyechi Joy]
-- Matric Number: [2024/278364]
-
 ## Assignment Contents
 This repository contains my solutions to the COS 261 Java programming assignment:
 
