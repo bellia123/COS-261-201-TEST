@@ -1,0 +1,26 @@
+public class TypeDifferences {
+    public static void main(String[] args) {
+        // int: primitive type
+        int a = 10;
+        
+        // Integer: wrapper class
+        Integer b = Integer.valueOf(10);
+        Integer c = 10; // Auto-boxing
+        
+        // String: character sequence
+        String d = "10";
+        
+        System.out.println("int value: " + a);
+        System.out.println("Integer value: " + b);
+        System.out.println("String value: " + d);
+        
+        // Converting between types
+        int intFromInteger = c.intValue(); // Unboxing
+        int intFromString = Integer.parseInt(d);
+        String stringFromInt = String.valueOf(a);
+        
+        System.out.println("int from Integer: " + intFromInteger);
+        System.out.println("int from String: " + intFromString);
+        System.out.println("String from int: " + stringFromInt);
+    }
+}
