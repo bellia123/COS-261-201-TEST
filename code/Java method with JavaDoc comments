@@ -1,0 +1,18 @@
+/**
+ * Calculates the Body Mass Index (BMI) for a person.
+ * The BMI is calculated using the formula: weight / (height * height)
+ * 
+ * @param weight The weight of the person in kilograms
+ * @param height The height of the person in meters
+ * @return The calculated BMI value
+ * @throws IllegalArgumentException If weight or height is less than or equal to zero
+ * @author Your Name
+ * @version 1.0
+ * @since 2023-05
+ */
+public double calculateBMI(double weight, double height) {
+    if (weight <= 0 || height <= 0) {
+        throw new IllegalArgumentException("Weight and height must be positive values");
+    }
+    return weight / (height * height);
+}
