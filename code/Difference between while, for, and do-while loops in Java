@@ -1,0 +1,44 @@
+public class LoopDifferences {
+    public static void main(String[] args) {
+        // for loop
+        System.out.println("For loop:");
+        for (int i = 1; i <= 5; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        
+        // while loop
+        System.out.println("While loop:");
+        int j = 1;
+        while (j <= 5) {
+            System.out.print(j + " ");
+            j++;
+        }
+        System.out.println();
+        
+        // do-while loop
+        System.out.println("Do-while loop:");
+        int k = 1;
+        do {
+            System.out.print(k + " ");
+            k++;
+        } while (k <= 5);
+        System.out.println();
+        
+        // difference with condition false from start
+        System.out.println("Loop with initial false condition:");
+        System.out.println("While loop (won't execute):");
+        int m = 10;
+        while (m < 5) {
+            System.out.print(m + " ");
+            m++;
+        }
+        
+        System.out.println("Do-while loop (executes once):");
+        int n = 10;
+        do {
+            System.out.print(n + " ");
+            n++;
+        } while (n < 5);
+    }
+}
