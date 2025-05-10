@@ -1,11 +1,18 @@
 NAME: ONYEKAWA ONYINYECHI JOY
+
 REG NO: 2024/278364
+
 COURSE: 261 TEST
+
 GITHUB: https://github.com/bellia123/COS-261-201-TEST.git
+
 DATE: 9/05/2025
+
 Online Java Compiler: Programiz
+
 NOTE: Comments are lines in codes that are ignored by the Java compiler. They are meant for us humans — to explain what the code does, why certain decisions were made, or to make it easier for developers and anyone else  to understand later. All codes have comments added to them for better clarity.
 Basics & Syntax
+
 1. Write a Java program to print "Hello, World!".
 
 public class HelloWorld {
@@ -15,10 +22,14 @@ public class HelloWorld {
 }
 
 2. Explain the difference between == and .equals() in Java.
+   
 In Java:
+
 == compares if two references point to the same object in memory
 .equals() compares the content or values of objects
+
 Example:
+
 public class EqualsVsEqual {
     public static void main(String[] args) {
         String s1 = new String("UNN");
@@ -32,10 +43,13 @@ public class EqualsVsEqual {
     }
 }
 
-3. What is the use of the main method in Java?
+4. What is the use of the main method in Java?
+   
 The main method serves as the entry point for any Java application. When you run a Java program, the JVM (Java Virtual Machine) looks for the main method to start execution. It must have the exact signature:
+
 public static void main(String[] args)
-4. Write a Java program to add two numbers entered by the user.
+
+6. Write a Java program to add two numbers entered by the user.
 
 import java.util.Scanner;
 
