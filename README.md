@@ -44,7 +44,6 @@ public class HelloWorld {
         System.out.println("Hello, World!");
     }
 }
-![print hello world](https://github.com/user-attachments/assets/f195c17a-59b6-458c-9904-9c11f4434215)
 
 
 2. Explain the difference between == and .equals() in Java.
